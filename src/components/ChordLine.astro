@@ -1,0 +1,55 @@
+---
+// It's [Bm]pourin' in, you're laid on the [Am]floor again
+const { line } = Astro.props;
+const chordArray = [];
+
+let extraChars = 0;
+
+for (let i = 0; i < line.length; i++) {
+    if (line.charAt(i) === "[") {
+        console.log(`[ found at ${i},`);
+        let j = i + 1;
+        while (line.charAt(j) !== "]" && j < line.length) {
+            j++;
+            if (j < line.length && line.charAt(j) === "]") {
+                console.log(`] found at ${j},`);
+                console.log(line.substring(i, j + 1));
+                let chord = line.substring(i, j + 1);
+                let fixedEndArray = j + 1 - extraChars;
+                let startIndex = i - extraChars;
+                extraChars += j + 1 - i;
+                chordArray.push({ chord, startIndex, fixedEndArray });
+            }
+        }
+    }
+}
+
+let chordString = " ".repeat(line.length - extraChars);
+for (let i = 0; i < chordArray.length; i++) {
+    chordString =
+        chordString.slice(0, chordArray[i].startIndex) +
+        chordArray[i].chord.substring(1, chordArray[i].chord.length - 1) +
+        chordString.slice(chordArray[i].fixedEndArray, chordString.length);
+}
+
+let lyrics = line;
+for (let i = 0; i < chordArray.length; i++) {
+    lyrics =
+        lyrics.slice(0, chordArray[i].startIndex) +
+        lyrics.slice(chordArray[i].fixedEndArray, lyrics.length);
+}
+---
+
+<p class="chords">{chordString}</p>
+<p>{lyrics}</p>
+
+<style>
+    p {
+        font-family: "Courier New", Courier, monospace;
+    }
+
+    .chords {
+        white-space: pre;
+        font-weight: 900;
+    }
+</style>
