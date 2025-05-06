@@ -1,0 +1,24 @@
+---
+title: "Mr. Brightside"
+artist: "The Killers"
+duration: 2:47
+capo: 0
+originalLink: "https://tabs.ultimate-guitar.com/tab/james-blunt/1973-chords-556985"
+spotify: "https://open.spotify.com/track/1BV0m40U0M4t1SLIsDnwZl?si=FaAwMdAWRi2r3NoNhMRhaA"
+tuning: "EADGBE"
+---
+
+import ChordLine from "../../components/ChordLine.astro";
+import Spotify from "../../components/Spotify.astro";
+
+<a href="/"> Home</a>
+
+<Spotify
+  artist={frontmatter.artist}
+  link={frontmatter.spotify}
+  title={frontmatter.title}
+/>
+
+<p> Capo: {frontmatter.capo === 0 ? "None" : frontmatter.capo} </p>
+
+<ChordLine line={"[F#m]Simona"} />

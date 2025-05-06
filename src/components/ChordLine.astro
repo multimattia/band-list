@@ -1,5 +1,4 @@
 ---
-// It's [Bm]pourin' in, you're laid on the [Am]floor again
 const { line } = Astro.props;
 const chordArray = [];
 
@@ -7,13 +6,10 @@ let extraChars = 0;
 
 for (let i = 0; i < line.length; i++) {
     if (line.charAt(i) === "[") {
-        console.log(`[ found at ${i},`);
         let j = i + 1;
         while (line.charAt(j) !== "]" && j < line.length) {
             j++;
             if (j < line.length && line.charAt(j) === "]") {
-                console.log(`] found at ${j},`);
-                console.log(line.substring(i, j + 1));
                 let chord = line.substring(i, j + 1);
                 let fixedEndArray = j + 1 - extraChars;
                 let startIndex = i - extraChars;
@@ -46,10 +42,12 @@ for (let i = 0; i < chordArray.length; i++) {
 <style>
     p {
         font-family: "Courier New", Courier, monospace;
+        line-height: 0.2;
     }
 
     .chords {
         white-space: pre;
         font-weight: 900;
+        line-height: 0.4;
     }
 </style>

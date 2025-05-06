@@ -1,0 +1,18 @@
+---
+const { link, title, capo, tuning, duration, artist } = Astro.props;
+
+let capoText = capo === 0 ? "None" : capo;
+---
+
+<a class="bg-slate-400 max-w-96 py-7 px-6 flex" href={link}>
+    <div class="flex flex-grow">
+        <p>
+            {artist}
+            {title}
+        </p>
+    </div>
+    <div class="mx-5 flex-col flex">
+        <span>Capo: {capoText}</span>
+        <span>Tuning: {tuning}</span>
+    </div>
+</a>
